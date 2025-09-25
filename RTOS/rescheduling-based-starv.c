@@ -12,12 +12,16 @@
 #define THREAD0_PRIORITY 7
 #define THREAD1_PRIORITY 7
 
-
+int count=0;
 
 void thread0(void)
 {
 	while (1) {
+		count++;
 		printk("Hello, I am thread0\n");
+		if (count==20){
+			k_thread_suspend(k_current_get());
+		}
 	}
 }
 
@@ -25,6 +29,9 @@ void thread1(void)
 {
 	while (1) {
 		printk("Hello, I am thread1\n");
+		if (count==20){
+			k_thread_suspend(k_current_get());
+		}
 	}
 }
 
